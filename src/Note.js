@@ -2,8 +2,11 @@ import React from "react";
 
 const Note = (props) => (
   <li className="note">
-    <input type="text" placeholder="Title" className="note__title" />
-    <textarea placeholder="Description..." className="note__description" />
+    <input type="text" placeholder={props.note.title} className="note__title" />
+    <textarea
+      placeholder={props.note.description}
+      className="note__description"
+    />
     <span className="note__delete">X</span>
   </li>
 );
