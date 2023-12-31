@@ -1,6 +1,6 @@
 import React from "react";
 
-const Note = () => (
+const Note = (props) => (
   <li className="note">
     <input type="text" placeholder="Title" className="note__title" />
     <textarea placeholder="Description..." className="note__description" />
