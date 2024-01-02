@@ -19,7 +19,11 @@ class App extends Component {
     const stringifiedNotes = localStorage.getItem("savedNotes");
     if (stringifiedNotes) {
       const savedNotes = JSON.parse(stringifiedNotes);
-      this.setState({ notes: savedNotes });
+      const showAllNotes = savedNotes.map((note) => {
+        note.doesMatchSearch = true;
+        return note;
+      });
+      this.setState({ notes: showAllNotes });
     }
   }
   componentDidUpdate() {
