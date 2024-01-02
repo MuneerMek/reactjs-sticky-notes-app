@@ -11,8 +11,7 @@ const Note = (props) => {
     const updatedValue = e.target.value;
     props.onType(editMeID, "description", updatedValue);
   };
-  const deleteNoteFunction = (e) => {
-    e.preventDefault();
+  const deleteNoteFunction = () => {
     const deleteID = props.note.id;
     props.deleteNote(deleteID);
   };

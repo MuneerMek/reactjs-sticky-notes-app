@@ -15,6 +15,18 @@ class App extends Component {
     searchText: "",
   };
 
+  componentDidMount() {
+    const stringifiedNotes = localStorage.getItem("savedNotes");
+    if (stringifiedNotes) {
+      const savedNotes = JSON.parse(stringifiedNotes);
+      this.setState({ notes: savedNotes });
+    }
+  }
+  componentDidUpdate() {
+    const stringifiedNotes = JSON.stringify(this.state.notes);
+    localStorage.setItem("savedNotes", stringifiedNotes);
+  }
+
   addNote = () => {
     const newNote = {
       id: Date.now(),
