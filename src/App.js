@@ -25,6 +25,25 @@ class App extends Component {
     this.setState({ notes: [newNote, ...this.state.notes] });
   };
 
+  onSearch = (search) => {
+    const searchQuery = search.toLowerCase();
+    const filteredNotes = this.state.notes.map((note) => {
+      if (!searchQuery) {
+        note.doesMatchSearch = true;
+        return note;
+      } else {
+        const noteTitle = note.title.toLowerCase();
+        const noteDescription = note.description.toLowerCase();
+        const titleMatch = noteTitle.includes(searchQuery);
+        const descMatch = noteDescription.includes(searchQuery);
+        const matchStatus = titleMatch || descMatch;
+        note.doesMatchSearch = matchStatus;
+        return note;
+      }
+    });
+    this.setState({ notes: filteredNotes, searchText: searchQuery });
+  };
+
   onType = (editMeID, updatedKey, updatedValue) => {
     // editMeId == id of the note that is edited
     // updatedKey == title or description field
@@ -49,7 +68,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header searchText={this.state.searchText} addNote={this.addNote} />
+        <Header
+          searchText={this.state.searchText}
+          onSearch={this.onSearch}
+          addNote={this.addNote}
+        />
         <NotesList onType={this.onType} notes={this.state.notes} />
       </div>
     );
